@@ -4,7 +4,7 @@ DROP PROCEDURE IF EXISTS ComputeAverageScoreForUser;
 
 DELIMITER $$
 
-CREATE PROCEDURE ComputeAverageScoreForUser ( IN user_id )
+CREATE PROCEDURE ComputeAverageScoreForUser ( IN user_id INT)
 BEGIN
 	DECLARE avg_score FLOAT;
 	SET avg_score = (
@@ -15,7 +15,7 @@ BEGIN
 	);
 
 	UPDATE users
-	SET users.average_score = avg_score
+	SET average_score = avg_score
 	WHERE id = user_id;
 
 END$$
