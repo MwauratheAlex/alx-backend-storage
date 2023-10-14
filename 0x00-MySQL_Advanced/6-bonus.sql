@@ -13,13 +13,10 @@ BEGIN
 	IF project_id IS NULL THEN
 		INSERT INTO projects (name) VALUES (project_name);
 		SET project_id = LAST_INSERT_ID();
-		INSERT INTO corrections (user_id, project_id, score) VALUES (user_id, project_id, score);
-	ELSE
-		UPDATE corrections
-		SET score = score
-		WHERE corrections.user_id = user_id
-		AND corrections.project_id = project_id;
-	END IF
+	END IF;
+	INSERT INTO corrections (user_id, project_id, score)
+	VALUES (user_id, project_id, score);
+
 END$$
 
 DELIMITER ;
