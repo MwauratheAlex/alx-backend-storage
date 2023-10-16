@@ -10,7 +10,7 @@ BEGIN
 	DECLARE weighted_avg FLOAT;
 
 	SET weighted_avg = (
-		SELECT SUM(corrections.score / projects.weight) / SUM(projects.weight)
+		SELECT SUM(corrections.score * projects.weight) / SUM(projects.weight)
 		FROM corrections
 		JOIN projects
 		ON corrections.project_id = projects.id
