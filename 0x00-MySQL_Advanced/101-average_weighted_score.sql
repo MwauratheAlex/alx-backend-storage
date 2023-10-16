@@ -7,13 +7,14 @@ DELIMITER $$
 CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
 BEGIN
 	UPDATE users
-	SET average_score = (
-		SELECT SUM(corrections.score * projects.weight) / SUM(projects.weight)
+	JOIN (
+		SELECT corrections.user_id,
+			SUM(corrections.score * projects.weight) / SUM(projects.weight) AS new_avg_score
 		FROM corrections
 		JOIN projects ON corrections.project_id = projects.id
-		WHERE corrections.user_id = users.id
 		GROUP BY corrections.user_id
-	);
+	) AS derived_table ON users.id = derived_table.user_id
+	SET users.average_score = derived_table.new_avg_score;
 END$$
 
 DELIMITER ;
