@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Top student module"""
-from pymongo.collection import Collection
 
 
-def top_students(mongo_collection: Collection):
+def top_students(mongo_collection):
     """returns all students sorted by average score"""
     pipeline = [
         {'$unwind': '$topics'},
