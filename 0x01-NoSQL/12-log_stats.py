@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Module contains a Python script that
-provides some stats about Nginx logs stored in MongoDB
+"""Provides some stats about Nginx logs stored in MongoDB
 """
 from pymongo import MongoClient
 
