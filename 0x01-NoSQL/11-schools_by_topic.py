@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-from pymongo.collection import Collection
 """School by topic module"""
+from pymongo.collection import Collection
 
 
 def schools_by_topic(mongo_collection: Collection, topic):
