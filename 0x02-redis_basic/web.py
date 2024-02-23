@@ -12,12 +12,16 @@ def cache_results(method: Callable) -> Callable:
 
     @wraps(method)
     def wrapper(url):
-        redis_instance.incr(f'count:{url}')
-        result = redis_instance.get(f'result:{url}')
-        if result is not None:
-            return result.decode('utf8')
+        result_key = f'result:{url}'
+        result = redis_instance.get(result_key)
+        if result:
+            return result.decode('utf-8')
+        count_key = f'count:{url}'
         result = method(url)
-        redis_instance.setex(f'result:{url}', 10, result)
+
+        redis_instance.incr(count_key)
+        redis_instance.set(result_key, result)
+        redis_instance.expire(result_key, 10)
         return result
     return wrapper
 
