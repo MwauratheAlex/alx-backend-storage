@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Redis Cache module"""
-from collections.abc import Callable
 import redis
 import uuid
-from typing import Optional, Union
+from typing import Optional, Union, Callable
 from functools import wraps
 
 
