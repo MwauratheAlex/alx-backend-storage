@@ -30,6 +30,7 @@ def cache_results(method: Callable) -> Callable:
             return result.decode('utf8')
         result = method(url)
         redis_instance.setex(key, 10, result)
+        redis_instance.set(f'count:{url}', 0)
         return result
     return wrapper
 
