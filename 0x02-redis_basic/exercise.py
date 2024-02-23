@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
+"""Redis Cache module"""
 from collections.abc import Callable
 import redis
 import uuid
 from typing import Optional, Union
 from functools import wraps
-"""Redis Cache module"""
 
 
 def count_calls(method: Callable) -> Callable:
@@ -19,6 +19,8 @@ def count_calls(method: Callable) -> Callable:
 
 
 class Cache:
+    """Redis cache"""
+
     def __init__(self) -> None:
         self._redis = redis.Redis()
         self._redis.flushdb()
