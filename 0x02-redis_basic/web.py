@@ -20,6 +20,7 @@ def cache_results(method: Callable) -> Callable:
         if result is not None:
             return result.decode('utf8')
         result = method(url)
+        redis_instance.set(count_key, 0)
         redis_instance.setex(result_key, 10, result)
         return result
     return wrapper
