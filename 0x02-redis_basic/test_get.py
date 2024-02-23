@@ -14,4 +14,4 @@ for value, fn in TEST_CASES.items():
     print(f"key: {key},\tvalue: {value}\tr_value: {r_value}")
     assert r_value == value
 
-print(cache.get('hello', None))
+print(cache.get('hello'))
