@@ -8,16 +8,6 @@ from functools import wraps
 redis_instance = redis.Redis()
 
 
-def count_calls(method: Callable) -> Callable:
-    """counts how many times a url was called"""
-
-    @wraps(method)
-    def wrapper(url):
-        redis_instance.incr(key)
-        return method(url)
-    return wrapper
-
-
 def cache_results(method: Callable) -> Callable:
     """cache results of method"""
 
