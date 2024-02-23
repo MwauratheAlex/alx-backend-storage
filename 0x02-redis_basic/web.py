@@ -40,6 +40,3 @@ def get_page(url: str) -> str:
     """uses the requests module to obtain the HTML content
     of a particular URL and returns it"""
     return requests.get(url).text
-
-
-print(get_page('https://google.com'))
