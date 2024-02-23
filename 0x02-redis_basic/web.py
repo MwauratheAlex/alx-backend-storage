@@ -34,8 +34,8 @@ def cache_results(method: Callable) -> Callable:
     return wrapper
 
 
-@cache_results
 @count_calls
+@cache_results
 def get_page(url: str) -> str:
     """uses the requests module to obtain the HTML content
     of a particular URL and returns it"""
