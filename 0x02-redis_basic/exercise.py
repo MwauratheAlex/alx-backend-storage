@@ -3,7 +3,19 @@ from collections.abc import Callable
 import redis
 import uuid
 from typing import Optional, Union
+from functools import wraps
 """Redis Cache module"""
+
+
+def count_calls(method: Callable) -> Callable:
+    """A decorator for counting method calls"""
+    key = method.__qualname__
+
+    @wraps(method)
+    def wrapper(*args, **kwargs):
+        args[0]._redis.incr(key)
+        return method(*args, **kwargs)
+    return wrapper
 
 
 class Cache:
@@ -11,6 +23,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """Stores data into redis"""
         key = str(uuid.uuid4())
